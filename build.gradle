@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "io.qameta.allure" version "2.11.2"
 }
 
 group 'org.example'
@@ -16,8 +17,19 @@ dependencies {
     implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.11.1'
     testImplementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.11.1'
     testImplementation group: 'io.rest-assured', name: 'json-schema-validator', version: '5.3.0'
+    testImplementation group: 'io.qameta.allure', name: 'allure-cucumber7-jvm', version: '2.21.0'
 }
 
-test {
+allure {
+    version = '2.21.0'
+}
+
+task executeBDDTest(type: Test) {
     useTestNG()
+    options {
+        jvmArgs = ['-Dcucumber.plugin=io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm']
+    }
+    testLogging.showStandardStreams = true
+    scanForTestClasses = false
+    finalizedBy 'allureReport'
 }

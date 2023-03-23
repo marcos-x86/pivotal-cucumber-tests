@@ -1,5 +1,7 @@
-package com.pivotaltracker;
+package com.pivotaltracker.stepdefinitions;
 
+import com.pivotaltracker.ConfigReader;
+import com.pivotaltracker.RequestManager;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
